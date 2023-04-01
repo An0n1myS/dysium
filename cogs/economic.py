@@ -7,7 +7,7 @@ import disnake
 from disnake.ext import commands, tasks
 from disnake import TextInputStyle
 
-import config
+import dysium
 
 import sqlite3
 

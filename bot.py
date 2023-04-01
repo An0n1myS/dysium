@@ -7,7 +7,7 @@ from disnake.ext import commands, tasks
 from disnake import TextInputStyle
 
 
-import config
+import dysium
 
 
 
@@ -126,6 +126,7 @@ class Bot(commands.Bot):
         super().__init__(command_prefix=commands.when_mentioned_or('.'), intents=intents)
 
 
+
     async def on_ready(self):
         print(f'Logged in as {self.user} (ID: {self.user.id})')
         print('------')
@@ -135,6 +136,7 @@ class Bot(commands.Bot):
 
         for guild in bot.guilds:
             for member in guild.members:
+                print(member.mention)
                 conn = sqlite3.connect('database/users.db')
                 curs = conn.cursor()
                 user_data = curs.execute(f"SELECT id FROM users where id={member.id}").fetchone()
@@ -146,8 +148,8 @@ class Bot(commands.Bot):
                     curs.execute("INSERT INTO users VALUES(NULL,?,?,?,?,?)", (member.id, member.display_name, 0, 0, 0))
                     conn.commit()
                     conn.close()
-                    girl_role = disnake.utils.get(member.guild.roles, id=config.GIRL_ROLE_ID)
-                    man_role = disnake.utils.get(member.guild.roles, id=config.MAN_ROLE_ID)
+                    girl_role = disnake.utils.get(member.guild.roles, id=dysium.GIRL_ROLE_ID)
+                    man_role = disnake.utils.get(member.guild.roles, id=dysium.MAN_ROLE_ID)
                     if girl_role in member.roles:
                         conn = sqlite3.connect('database/users.db')
                         curs = conn.cursor()
@@ -163,8 +165,8 @@ class Bot(commands.Bot):
                         conn.commit()
                         conn.close()
                 else:
-                    girl_role = disnake.utils.get(member.guild.roles, id=config.GIRL_ROLE_ID)
-                    man_role = disnake.utils.get(member.guild.roles, id=config.MAN_ROLE_ID)
+                    girl_role = disnake.utils.get(member.guild.roles, id=dysium.GIRL_ROLE_ID)
+                    man_role = disnake.utils.get(member.guild.roles, id=dysium.MAN_ROLE_ID)
                     if girl_role in member.roles:
                         conn = sqlite3.connect('database/users.db')
                         curs = conn.cursor()
@@ -186,7 +188,7 @@ bot = Bot()
 
 @bot.event
 async def on_member_join(member):
-    unverify_role = disnake.utils.get(member.guild.roles, id=config.UNVERIFY_ID)
+    unverify_role = disnake.utils.get(member.guild.roles, id=dysium.UNVERIFY_ID)
     await member.add_roles(unverify_role)
 
 @bot.command()
@@ -215,13 +217,10 @@ async def reload(ctx, extension):
         await ctx.send("Ви не є розробником даного бота")
 
 
-
-
-
 @bot.event
 async def on_voice_state_update(member, before, after):
     if after.channel != None:
-        if after.channel.id == 1057976071661817927:
+        if after.channel.id == 1013024334186549348:
             category = after.channel.category
 
             channel2 = await member.guild.create_voice_channel(
@@ -242,4 +241,4 @@ for filename in os.listdir("cogs/"):
         bot.load_extension(f"cogs.{filename[:-3]}")
         print(f"Cog {filename[:-3]} is loaded")
 
-bot.run(config.TOKEN)
+bot.run(dysium.TOKEN)

@@ -6,7 +6,7 @@ import disnake
 from disnake.ext import commands, tasks
 from disnake import TextInputStyle
 
-import config
+import dysium
 
 import sqlite3
 
@@ -20,15 +20,15 @@ class AdministatorBot(commands.Cog):
         print(f"member:{ctx.author} func: /action")
         if member and member.top_role.position > ctx.author.top_role.position:
             return await ctx.send(f"Ви не маєте достатньо прав для дій над користувачем {member}")
-        support_role = disnake.utils.get(ctx.guild.roles, id=config.SUPPORT_ROLE_ID)
-        control_role = disnake.utils.get(ctx.guild.roles, id=config.CONTROL_ROLE_ID)
-        moderator_role = disnake.utils.get(ctx.guild.roles, id=config.MODERATOR_ROLE_ID)
-        curator_role = disnake.utils.get(ctx.guild.roles, id=config.CURATOR_ROLE_ID)
+        support_role = disnake.utils.get(ctx.guild.roles, id=dysium.SUPPORT_ROLE_ID)
+        control_role = disnake.utils.get(ctx.guild.roles, id=dysium.CONTROL_ROLE_ID)
+        moderator_role = disnake.utils.get(ctx.guild.roles, id=dysium.MODERATOR_ROLE_ID)
+        curator_role = disnake.utils.get(ctx.guild.roles, id=dysium.CURATOR_ROLE_ID)
 
-        curator_moderator_role = disnake.utils.get(ctx.guild.roles, id=config.CURATOR_MODERATOR_ROLE_ID)
-        curator_control_role = disnake.utils.get(ctx.guild.roles, id=config.CURATOR_CONTROL_ROLE_ID)
-        curator_support_role = disnake.utils.get(ctx.guild.roles, id=config.CURATOR_SUPPORT_ROLE_ID)
-        curator_eventer_role = disnake.utils.get(ctx.guild.roles, id=config.CURATOR_EVENTER_ROLE_ID)
+        curator_moderator_role = disnake.utils.get(ctx.guild.roles, id=dysium.CURATOR_MODERATOR_ROLE_ID)
+        curator_control_role = disnake.utils.get(ctx.guild.roles, id=dysium.CURATOR_CONTROL_ROLE_ID)
+        curator_support_role = disnake.utils.get(ctx.guild.roles, id=dysium.CURATOR_SUPPORT_ROLE_ID)
+
 
 
         if support_role in ctx.author.roles:
@@ -84,9 +84,9 @@ class Support(disnake.ui.View):
     async def button_verify(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
         self.stop()
         await interaction.response.send_message(f"Верифікація {self.member.mention} успішна")
-        unverify_role = interaction.guild.get_role(config.UNVERIFY_ID)
-        girl_role = interaction.guild.get_role(config.GIRL_ROLE_ID)
-        man_role = interaction.guild.get_role(config.MAN_ROLE_ID)
+        unverify_role = interaction.guild.get_role(dysium.UNVERIFY_ID)
+        girl_role = interaction.guild.get_role(dysium.GIRL_ROLE_ID)
+        man_role = interaction.guild.get_role(dysium.MAN_ROLE_ID)
         await self.member.remove_roles(unverify_role)
         await self.member.add_roles(man_role)
         conn = sqlite3.connect('database/users.db')
@@ -120,8 +120,8 @@ class Support(disnake.ui.View):
     async def button_change_gender(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
 
         await interaction.response.send_message(f"Стать {self.member.mention} була змінена")
-        girl_role = interaction.guild.get_role(config.GIRL_ROLE_ID)
-        man_role = interaction.guild.get_role(config.MAN_ROLE_ID)
+        girl_role = interaction.guild.get_role(dysium.GIRL_ROLE_ID)
+        man_role = interaction.guild.get_role(dysium.MAN_ROLE_ID)
         if girl_role in self.member.roles:
             await self.member.add_roles(man_role)
             await self.member.remove_roles(girl_role)
@@ -173,7 +173,7 @@ class Support(disnake.ui.View):
 
     @disnake.ui.button(label="Заблокувати", style=disnake.ButtonStyle.grey)
     async def button_block(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        block_role = self.member.guild.get_role(config.BLOCK_ID)
+        block_role = self.member.guild.get_role(dysium.BLOCK_ID)
         await self.member.add_roles(block_role)
         await interaction.response.send_message(f"Учасник {self.member.mention} був заблокований")
 
@@ -206,7 +206,7 @@ class Control(disnake.ui.View):
 
     @disnake.ui.button(label="Зняти застереження", style=disnake.ButtonStyle.grey)
     async def button_unwarn(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        warn_role = self.member.guild.get_role(config.WARN_ROLE_ID)
+        warn_role = self.member.guild.get_role(dysium.WARN_ROLE_ID)
         await self.member.remove_roles(warn_role)
         await interaction.response.send_message(f"Користувач {self.member.mention} позбавлений застереження")
 
@@ -217,7 +217,7 @@ class Control(disnake.ui.View):
 
     @disnake.ui.button(label="Зняти чат мут", style=disnake.ButtonStyle.grey)
     async def button_chat_unmute(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        chat_mute_role = self.member.guild.get_role(config.MUTE_ROLE_ID)
+        chat_mute_role = self.member.guild.get_role(dysium.MUTE_ROLE_ID)
         await self.member.remove_roles(chat_mute_role)
         status = "Active"
         conn = sqlite3.connect('database/chat_mutes.db')
@@ -271,8 +271,8 @@ class Moderator(disnake.ui.View):
     async def button_change_gender(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
 
 
-        girl_role = interaction.guild.get_role(config.GIRL_ROLE_ID)
-        man_role = interaction.guild.get_role(config.MAN_ROLE_ID)
+        girl_role = interaction.guild.get_role(dysium.GIRL_ROLE_ID)
+        man_role = interaction.guild.get_role(dysium.MAN_ROLE_ID)
         if girl_role in self.member.roles:
             await self.member.add_roles(man_role)
             await self.member.remove_roles(girl_role)
@@ -326,13 +326,13 @@ class Moderator(disnake.ui.View):
 
     @disnake.ui.button(label="Заблокувати", style=disnake.ButtonStyle.blurple)
     async def button_ban(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        ban_role = self.member.guild.get_role(config.BAN_ROLE_ID)
+        ban_role = self.member.guild.get_role(dysium.BAN_ROLE_ID)
         await self.member.add_roles(ban_role)
         await interaction.response.send_message(f"Користувача {self.member.mention} було заблоковано")
 
     @disnake.ui.button(label="Розблокувати", style=disnake.ButtonStyle.grey)
     async def button_unban(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        ban_role = self.member.guild.get_role(config.BAN_ROLE_ID)
+        ban_role = self.member.guild.get_role(dysium.BAN_ROLE_ID)
         await self.member.remove_roles(ban_role)
         await interaction.response.send_message(f"Користувача {self.member.mention} було разбанено")
 
@@ -343,7 +343,7 @@ class Moderator(disnake.ui.View):
 
     @disnake.ui.button(label="Зняти застереження", style=disnake.ButtonStyle.grey)
     async def button_unwarn(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        warn_role = self.member.guild.get_role(config.WARN_ROLE_ID)
+        warn_role = self.member.guild.get_role(dysium.WARN_ROLE_ID)
         await self.member.remove_roles(warn_role)
         status = "Active"
         conn = sqlite3.connect('database/warns.db')
@@ -361,7 +361,7 @@ class Moderator(disnake.ui.View):
 
     @disnake.ui.button(label="Зняти голосовий мут", style=disnake.ButtonStyle.grey)
     async def button_voice_unmute(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        voice_mute_role = self.member.guild.get_role(config.VOICE_MUTE_ROLE_ID)
+        voice_mute_role = self.member.guild.get_role(dysium.VOICE_MUTE_ROLE_ID)
         await self.member.remove_roles(voice_mute_role)
         status = "Active"
         conn = sqlite3.connect('database/voice_mutes.db')
@@ -396,7 +396,7 @@ class Moderator(disnake.ui.View):
 
     @disnake.ui.button(label="Зняти мут у чаті", style=disnake.ButtonStyle.grey)
     async def button_chat_unmute(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        chat_mute_role = self.member.guild.get_role(config.MUTE_ROLE_ID)
+        chat_mute_role = self.member.guild.get_role(dysium.MUTE_ROLE_ID)
         await self.member.remove_roles(chat_mute_role)
         status = "Active"
         conn = sqlite3.connect('database/chat_mutes.db')
@@ -450,8 +450,8 @@ class CuratorModerator(disnake.ui.View):
     async def button_change_gender(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
 
 
-        girl_role = interaction.guild.get_role(config.GIRL_ROLE_ID)
-        man_role = interaction.guild.get_role(config.MAN_ROLE_ID)
+        girl_role = interaction.guild.get_role(dysium.GIRL_ROLE_ID)
+        man_role = interaction.guild.get_role(dysium.MAN_ROLE_ID)
         if girl_role in self.member.roles:
             await self.member.add_roles(man_role)
             await self.member.remove_roles(girl_role)
@@ -505,13 +505,13 @@ class CuratorModerator(disnake.ui.View):
 
     @disnake.ui.button(label="Заблокувати", style=disnake.ButtonStyle.blurple)
     async def button_ban(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        ban_role = self.member.guild.get_role(config.BAN_ROLE_ID)
+        ban_role = self.member.guild.get_role(dysium.BAN_ROLE_ID)
         await self.member.add_roles(ban_role)
         await interaction.response.send_message(f"Користувач {self.member.mention} був заблокований")
 
     @disnake.ui.button(label="Розблокувати", style=disnake.ButtonStyle.grey)
     async def button_unban(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        ban_role = self.member.guild.get_role(config.BAN_ROLE_ID)
+        ban_role = self.member.guild.get_role(dysium.BAN_ROLE_ID)
         await self.member.remove_roles(ban_role)
         await interaction.response.send_message(f"Користувач {self.member.mention} був розблокований ")
 
@@ -522,7 +522,7 @@ class CuratorModerator(disnake.ui.View):
 
     @disnake.ui.button(label="Зняти застереження", style=disnake.ButtonStyle.grey)
     async def button_unwarn(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        warn_role = self.member.guild.get_role(config.WARN_ROLE_ID)
+        warn_role = self.member.guild.get_role(dysium.WARN_ROLE_ID)
         await self.member.remove_roles(warn_role)
         status = "Active"
         conn = sqlite3.connect('database/warns.db')
@@ -540,7 +540,7 @@ class CuratorModerator(disnake.ui.View):
 
     @disnake.ui.button(label="Зняти голосовий мут", style=disnake.ButtonStyle.grey)
     async def button_voice_unmute(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        voice_mute_role = self.member.guild.get_role(config.VOICE_MUTE_ROLE_ID)
+        voice_mute_role = self.member.guild.get_role(dysium.VOICE_MUTE_ROLE_ID)
         await self.member.remove_roles(voice_mute_role)
         status = "Active"
         conn = sqlite3.connect('database/voice_mutes.db')
@@ -575,7 +575,7 @@ class CuratorModerator(disnake.ui.View):
 
     @disnake.ui.button(label="Зняти чат мут", style=disnake.ButtonStyle.grey)
     async def button_chat_unmute(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        chat_mute_role = self.member.guild.get_role(config.MUTE_ROLE_ID)
+        chat_mute_role = self.member.guild.get_role(dysium.MUTE_ROLE_ID)
         await self.member.remove_roles(chat_mute_role)
         status = "Active"
         conn = sqlite3.connect('database/chat_mutes.db')
@@ -628,8 +628,8 @@ class CuratorModerator(disnake.ui.View):
     async def button_add_modrator(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
         current = datetime.datetime.now()
         add_time = f"{current.year}-{current.month}-{current.day} {current.hour}:{current.minute}"
-        moderator_role = disnake.utils.get(interaction.guild.roles, id=config.MODERATOR_ROLE_ID)
-        staff_role = disnake.utils.get(interaction.guild.roles, id=config.STAFF_ROLE_ID)
+        moderator_role = disnake.utils.get(interaction.guild.roles, id=dysium.MODERATOR_ROLE_ID)
+        staff_role = disnake.utils.get(interaction.guild.roles, id=dysium.STAFF_ROLE_ID)
         conn = sqlite3.connect('database/staff.db')
         curs = conn.cursor()
         curs.execute("INSERT INTO moderator VALUES(NULL,?,?,?,?,?,?,?)", (self.member.id, 100, add_time, 0, 0, 0, 0,))
@@ -641,8 +641,8 @@ class CuratorModerator(disnake.ui.View):
 
     @disnake.ui.button(label="Звільнити модератора", style=disnake.ButtonStyle.grey)
     async def button_remove_moderator(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        moderator_role = disnake.utils.get(interaction.guild.roles, id=config.MODERATOR_ROLE_ID)
-        staff_role = disnake.utils.get(interaction.guild.roles, id=config.STAFF_ROLE_ID)
+        moderator_role = disnake.utils.get(interaction.guild.roles, id=dysium.MODERATOR_ROLE_ID)
+        staff_role = disnake.utils.get(interaction.guild.roles, id=dysium.STAFF_ROLE_ID)
         conn = sqlite3.connect('database/staff.db')
         curs = conn.cursor()
         curs.execute("DELETE FROM moderator WHERE userid=?", (self.member.id,))
@@ -681,7 +681,7 @@ class CuratorControl(disnake.ui.View):
 
     @disnake.ui.button(label="Зняти застереження", style=disnake.ButtonStyle.grey)
     async def button_unwarn(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        warn_role = self.member.guild.get_role(config.WARN_ROLE_ID)
+        warn_role = self.member.guild.get_role(dysium.WARN_ROLE_ID)
         await self.member.remove_roles(warn_role)
         await interaction.response.send_message(f"Користувач {self.member.mention} був позбавлений застереження")
 
@@ -693,7 +693,7 @@ class CuratorControl(disnake.ui.View):
     @disnake.ui.button(label="Зняти чат мут", style=disnake.ButtonStyle.grey)
     async def button_chat_unmute(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
         await interaction.response.defer()
-        chat_mute_role = self.member.guild.get_role(config.MUTE_ROLE_ID)
+        chat_mute_role = self.member.guild.get_role(dysium.MUTE_ROLE_ID)
         await self.member.remove_roles(chat_mute_role)
         status = "Active"
         conn = sqlite3.connect('database/chat_mutes.db')
@@ -745,8 +745,8 @@ class CuratorControl(disnake.ui.View):
     async def button_add_control(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
         current = datetime.datetime.now()
         add_time = f"{current.year}-{current.month}-{current.day} {current.hour}:{current.minute}"
-        control_role = disnake.utils.get(interaction.guild.roles, id=config.CONTROL_ROLE_ID)
-        staff_role = disnake.utils.get(interaction.guild.roles, id=config.STAFF_ROLE_ID)
+        control_role = disnake.utils.get(interaction.guild.roles, id=dysium.CONTROL_ROLE_ID)
+        staff_role = disnake.utils.get(interaction.guild.roles, id=dysium.STAFF_ROLE_ID)
         conn = sqlite3.connect('database/staff.db')
         curs = conn.cursor()
         curs.execute("INSERT INTO control VALUES(NULL,?,?,?,?,?,?)", (self.member.id, 100, add_time, 0, 0, 0,))
@@ -758,8 +758,8 @@ class CuratorControl(disnake.ui.View):
 
     @disnake.ui.button(label="Звільнити редактора", style=disnake.ButtonStyle.grey)
     async def button_remove_control(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        control_role = disnake.utils.get(interaction.guild.roles, id=config.CONTROL_ROLE_ID)
-        staff_role = disnake.utils.get(interaction.guild.roles, id=config.STAFF_ROLE_ID)
+        control_role = disnake.utils.get(interaction.guild.roles, id=dysium.CONTROL_ROLE_ID)
+        staff_role = disnake.utils.get(interaction.guild.roles, id=dysium.STAFF_ROLE_ID)
         conn = sqlite3.connect('database/staff.db')
         curs = conn.cursor()
         curs.execute("DELETE FROM control WHERE userid=?", (self.member.id,))
@@ -795,9 +795,9 @@ class CuratorSupport(disnake.ui.View):
     async def button_verify(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
         self.stop()
         await interaction.response.send_message(f"Верифікація {self.member.mention} успішна")
-        unverify_role = interaction.guild.get_role(config.UNVERIFY_ID)
-        girl_role = interaction.guild.get_role(config.GIRL_ROLE_ID)
-        man_role = interaction.guild.get_role(config.MAN_ROLE_ID)
+        unverify_role = interaction.guild.get_role(dysium.UNVERIFY_ID)
+        girl_role = interaction.guild.get_role(dysium.GIRL_ROLE_ID)
+        man_role = interaction.guild.get_role(dysium.MAN_ROLE_ID)
         await self.member.remove_roles(unverify_role)
         await self.member.add_roles(man_role)
         conn = sqlite3.connect('database/users.db')
@@ -831,8 +831,8 @@ class CuratorSupport(disnake.ui.View):
     async def button_change_gender(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
 
         await interaction.response.send_message(f"Стать {self.member.mention} змінено")
-        girl_role = interaction.guild.get_role(config.GIRL_ROLE_ID)
-        man_role = interaction.guild.get_role(config.MAN_ROLE_ID)
+        girl_role = interaction.guild.get_role(dysium.GIRL_ROLE_ID)
+        man_role = interaction.guild.get_role(dysium.MAN_ROLE_ID)
         if girl_role in self.member.roles:
             await self.member.add_roles(man_role)
             await self.member.remove_roles(girl_role)
@@ -884,7 +884,7 @@ class CuratorSupport(disnake.ui.View):
 
     @disnake.ui.button(label="Заблокувати", style=disnake.ButtonStyle.grey)
     async def button_block(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        block_role = self.member.guild.get_role(config.BLOCK_ID)
+        block_role = self.member.guild.get_role(dysium.BLOCK_ID)
         await self.member.add_roles(block_role)
         await interaction.response.send_message(f"Користувача {self.member.mention} заблоковано")
 
@@ -913,8 +913,8 @@ class CuratorSupport(disnake.ui.View):
     async def button_add_support(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
         current = datetime.datetime.now()
         add_time = f"{current.year}-{current.month}-{current.day} {current.hour}:{current.minute}"
-        support_role = disnake.utils.get(interaction.guild.roles, id=config.SUPPORT_ROLE_ID)
-        staff_role = disnake.utils.get(interaction.guild.roles, id=config.STAFF_ROLE_ID)
+        support_role = disnake.utils.get(interaction.guild.roles, id=dysium.SUPPORT_ROLE_ID)
+        staff_role = disnake.utils.get(interaction.guild.roles, id=dysium.STAFF_ROLE_ID)
         conn = sqlite3.connect('database/staff.db')
         curs = conn.cursor()
         curs.execute("INSERT INTO support VALUES(NULL,?,?,?,?)", (self.member.id, 100, add_time, 0,))
@@ -926,8 +926,8 @@ class CuratorSupport(disnake.ui.View):
 
     @disnake.ui.button(label="Звільнити охоронця", style=disnake.ButtonStyle.grey)
     async def button_remove_support(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        support_role = disnake.utils.get(interaction.guild.roles, id=config.SUPPORT_ROLE_ID)
-        staff_role = disnake.utils.get(interaction.guild.roles, id=config.STAFF_ROLE_ID)
+        support_role = disnake.utils.get(interaction.guild.roles, id=dysium.SUPPORT_ROLE_ID)
+        staff_role = disnake.utils.get(interaction.guild.roles, id=dysium.STAFF_ROLE_ID)
         conn = sqlite3.connect('database/staff.db')
         curs = conn.cursor()
         curs.execute("DELETE FROM support WHERE userid=?", (self.member.id,))
@@ -988,7 +988,7 @@ class ModalWarn(disnake.ui.Modal):
                          (self.member.id, value[:1024], end_warn_time, self.author.id, "Active",))
             conn.commit()
             conn.close()
-        warn_role = self.member.guild.get_role(config.WARN_ROLE_ID)
+        warn_role = self.member.guild.get_role(dysium.WARN_ROLE_ID)
         await self.member.add_roles(warn_role)
         await inter.response.send_message(embed=embed)
 
@@ -1117,7 +1117,7 @@ class ModalChatMute(disnake.ui.Modal):
             conn.close()
 
         embed_chat_mute.set_thumbnail(url=self.member.avatar.url)
-        chat_mute_role = self.member.guild.get_role(config.MUTE_ROLE_ID)
+        chat_mute_role = self.member.guild.get_role(dysium.MUTE_ROLE_ID)
         await self.member.add_roles(chat_mute_role)
         await inter.response.send_message(embed=embed_chat_mute)
 
@@ -1246,7 +1246,7 @@ class ModalVoiceMute(disnake.ui.Modal):
             conn.close()
 
         embed_voice_mute.set_thumbnail(url=self.member.avatar.url)
-        voice_mute_role = self.member.guild.get_role(config.VOICE_MUTE_ROLE_ID)
+        voice_mute_role = self.member.guild.get_role(dysium.VOICE_MUTE_ROLE_ID)
         await self.member.add_roles(voice_mute_role)
         await inter.response.send_message(embed=embed_voice_mute)
 

@@ -41,7 +41,7 @@ class PrivateRoom(commands.Cog):
 
     @commands.slash_command(name="private_room_create", description="Створити приватну кымнату")
     async def private_room_create(self, ctx, name:str):
-        category = disnake.utils.get(ctx.guild.categories, id=1075910758937923635)
+        category = disnake.utils.get(ctx.guild.categories, id=1013019526167789578)
         voice_channel = await ctx.guild.create_voice_channel(name=name, category=category)
 
         conn = sqlite3.connect('database/private.db')
@@ -198,7 +198,7 @@ class RoomManage(disnake.ui.View):
         msg = await self.bot.wait_for('message', check=lambda message: message.author == interaction.author, timeout=60.0)
         await self.bot.process_commands(msg)
         msg_content = msg.content
-
+        
         member_id = int(msg_content[2:-1])
         member = disnake.utils.get(interaction.guild.members, id=member_id)
         overwrite = disnake.PermissionOverwrite()
@@ -228,7 +228,7 @@ class RoomManage(disnake.ui.View):
         msg = await self.bot.wait_for('message', check=lambda message: message.author == interaction.author, timeout=60.0)
         await self.bot.process_commands(msg)
         msg_content = msg.content
-
+        
         member_id = int(msg_content[2:-1])
         member = disnake.utils.get(interaction.guild.members, id=member_id)
 

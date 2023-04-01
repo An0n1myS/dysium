@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e773ffe8-d684-43b0-b5e0-0cb823aa4f0e" name="Changes" comment="fix bags and added private room with room panel" />
+    <list default="true" id="e773ffe8-d684-43b0-b5e0-0cb823aa4f0e" name="Changes" comment="fix bags and added private room with room panel">
+      <change afterPath="$PROJECT_DIR$/dysium.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/administrator_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/administrator_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/economic.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/economic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/event_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/event_bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/private_room.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/private_room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/chat_mutes.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/event.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/private.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/roles.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/staff.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/users.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/voice_mutes.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/warns.db" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,9 +50,15 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/An0n1myS/PycharmProjects/dysium&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\An0n1myS\PycharmProjects\dysium" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.bot">
     <configuration name="ыщьу" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="adminBot" />
@@ -79,6 +102,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="gbt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="adminBot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cogs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cogs/gbt.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="someth" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="adminBot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -103,6 +147,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.bot" />
+        <item itemvalue="Python.gbt" />
         <item itemvalue="Python.someth" />
         <item itemvalue="Python.ыщьу" />
       </list>
