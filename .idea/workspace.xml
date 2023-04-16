@@ -5,22 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e773ffe8-d684-43b0-b5e0-0cb823aa4f0e" name="Changes" comment="fix bags and added private room with room panel">
-      <change afterPath="$PROJECT_DIR$/dysium.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/administrator_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/administrator_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/economic.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/economic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/event_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/event_bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/private_room.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/private_room.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/chat_mutes.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/event.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/private.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/roles.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/staff.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/users.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/voice_mutes.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/warns.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/chat_mutes.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/chat_mutes.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/event.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/event.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/private.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/private.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/roles.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/roles.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/users.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/voice_mutes.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/voice_mutes.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/warns.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/warns.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dysium.py" beforeDir="false" afterPath="$PROJECT_DIR$/dysium.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +193,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676730805019</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix bags and added private room with room panel">
+      <created>1680371482499</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1680371482499</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
